@@ -1,9 +1,16 @@
-require 'open-uri'
+require 'http'
 
-def events_around(latitude,longitude)
-response = open('https://api.meetup.com/2/cities?&sign=true&photo-host=public&lon=#{longitude}&radius=20&lat=#{latitude}&page=20').read
+def getlocation
+lat = 24.8154
+lon = 120.9672
+return lat, lon
+end
+
+def events_around
+lat = 24.8154
+lon = 120.9672
+response = HTTP.get('https://api.meetup.com/2/cities?&sign=true&photo-host=public&lon=#{lon}&radius=20&lat=#{lat}&page=20').read
 puts response
-def addlog
 end
 
 def addlog(tolog)
@@ -11,3 +18,4 @@ def addlog(tolog)
     f.puts tolog
   }
 end
+events_around
