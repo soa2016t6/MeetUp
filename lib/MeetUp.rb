@@ -17,6 +17,7 @@ module Meetup
       #groups =_response HTTP.get(api_url)
       JSON.load(_response.to_s)
     end
+
     def getgroup
       lat = 24.8154
       lon = 120.9672
