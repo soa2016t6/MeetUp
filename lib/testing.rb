@@ -5,3 +5,6 @@ c = cities[0]
 
 events = @meetup_api.get_events(c['city'], c['lat'], c['lon'])
 puts events
+
+groups = @meetup_api.get_groups("tw", "Taipei City")
+puts groups

@@ -17,6 +17,7 @@ module Meetup
     # Gets cities based on country code (ex. tw)
     def get_cities(country_code)
       api_url = URI.join(VERSIONED_API_URL, '/cities/')
+      puts
       puts api_url
       cities_response = HTTP.get(api_url,
                                  params: { country: country_code,
@@ -30,6 +31,8 @@ module Meetup
     # Gets events based on the location. Place var just for fixtures
     def get_events(place, lat, lon)
       api_url = URI.join(API_URL, '/find/events/')
+      puts
+      puts api_url
       events_response = HTTP.get(api_url,
                                  params: { lon: lon,
                                            lat: lat,
