@@ -41,8 +41,8 @@ module Meetup
     end
 
     def add_log(response, filename)
-      filepath = "#{LOG_LOCATION} #{filename}.txt"
-      File.open(filepath, 'w+') { |file| file.write(response) }
+      filepath = "#{LOG_LOCATION} #{filename}.yml"
+      File.open(filepath, 'w+') { |file| file.write(response.to_yaml) }
     end
   end
 end
