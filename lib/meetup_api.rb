@@ -11,7 +11,7 @@ module Meetup
 
     # Grabs the api ket from config file inside the config directory
     def initialize
-      @access_key = CREDENTIALS['api_key']
+      @access_key = CREDENTIALS.first['api_key']
     end
 
     # Gets cities based on country code (ex. tw)
@@ -45,17 +45,17 @@ module Meetup
 
     # Finds groups based on a location text query
     def get_groups(country_code, location_raw_text)
-        api_url = URI.join(API_URL, '/find/groups')
-        puts
-        puts api_url
-        groups_response = HTTP.get(api_url,
-                                   params: { country: country_code,
-                                             fallback_suggestions: 'true',
-                                             location: location_raw_text,
-                                             key: @access_key })
-        response = JSON.parse(groups_response.to_s)
-        puts response
-        add_log(response, "groups_at_#{location_raw_text}")
+      api_url = URI.join(API_URL, '/find/groups')
+      puts
+      puts api_url
+      groups_response = HTTP.get(api_url,
+                                 params: { country: country_code,
+                                           fallback_suggestions: 'true',
+                                           location: location_raw_text,
+                                           key: @access_key })
+      response = JSON.parse(groups_response.to_s)
+      puts response
+      add_log(response, "groups_at_#{location_raw_text}")
     end
 
     def add_log(response, filename)
