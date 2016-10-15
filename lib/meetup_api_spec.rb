@@ -5,27 +5,32 @@ require 'minitest/rg'
 require_relative 'meetup_api'
 
 CREDENTIALS = YAML.load(File.read('../config/credentials.yml'))
-FB_RESPONSE = YAML.load(File.read('spec/fixtures/fb_response.yml'))
-RESULTS = YAML.load(File.read('spec/fixtures/results.yml'))
 
 describe 'MeetUp Api tests' do
   it 'should return the cities using the country_code' do
-    tw
+    get_cities(tw)
+
   end
   it 'should save the results of get_cities to "cities country_code.yml"' do
     cities_tw.yml
+    get_cities(tw)
   end
   it 'should return the events using the City' do
+    get_events(Taipei)
     Taipei
   end
   it 'should save the results of get_events to "events City.yml"' do
+    get_events(Taipei)
     cities_tw.yml
   end
   it 'should return the groups using the location_raw_text' do
-    TaipeiCity
+    get_groups(tw,TaipeiCity)
+
   end
   it 'should save the results of get_groups to "cities country_code.yml"' do
-    cities_tw.yml
+    get_groups(tw,TaipeiCity)
+    LOG_LOCATION
+    must_equal."groups_at_Taipei City.yml"
   end
 
 end
