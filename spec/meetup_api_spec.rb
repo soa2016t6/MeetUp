@@ -2,7 +2,7 @@
 require 'minitest/autorun'
 require 'minitest/rg'
 require 'yaml'
-require './lib/meetup_api.rb'
+require '../lib/meetup_api.rb'
 
 CREDENTIALS = YAML.load(File.read('../config/credentials.yml'))
 @meetup_api = Meetup::MeetupApi.new
