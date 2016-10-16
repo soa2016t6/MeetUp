@@ -11,7 +11,7 @@ module Meetup
 
     # Grabs the api ket from config file inside the config directory
     def initialize
-      @access_key = CREDENTIALS['api_key']
+      @access_key = CREDENTIALS.first['api_key']
     end
 
     # Gets cities based on country code (ex. tw)
