@@ -3,20 +3,35 @@ require 'minitest/autorun'
 require 'minitest/rg'
 require 'yaml'
 require '../lib/meetup_api.rb'
+require '../lib/location.rb'
+require '../lib/city.rb'
 
 CREDENTIALS = YAML.load(File.read('../config/credentials.yml'))
-@meetup_api = Meetup::MeetupApi.new(CREDENTIALS)
-cities = @meetup_api.get_cities('tw')['results']
-c = cities[0]
-events = @meetup_api.get_events(c['city'], c['lat'], c['lon'])
-puts events
-groups = @meetup_api.get_groups('tw', 'Taipei City')
-puts groups
 
 describe 'MeetUp Api tests' do
-  it 'should save the results of get_cities to "cities country_code.yml"' do
+  before do
+    @meetup_api = Meetup::MeetupApi.new(CREDENTIALS)
+    cities = @meetup_api.get_cities('tw')['results']
+    c = cities[0]
+    @city = c
+    @cities = cities
+  end
+
+  it 'should get cities data from api"' do
+    @cities.length.must_be :>, 0
+  end
+
+  it 'should save the results of get_cities to "cities_country_code.yml"' do
     cities_output = YAML.load(File.read('fixtures/cities_tw.yml'))
-    cities_output.count { |line| line =~ /members:/ }.must_be.>=1
+    cities_output.length.must_be :>, 0
+  end
+
+  it 'should load the events from a city' do
+    c_location = Meetup::Location.new(@city['lat'], @city['lon'])
+    city_object = Meetup::City.new(@meetup_api,
+                                   @city['name'],
+                                   c_location, @city['country'])
+    city_object.events.length.must_be :>, 0
   end
 
   it 'should save the results of get_events to "events City.yml"' do
