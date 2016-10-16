@@ -1,4 +1,4 @@
-
+# frozen_string_literal: true
 require_relative 'meetup_api'
 require_relative 'location'
 require_relative 'event'
@@ -16,6 +16,4 @@ city_object = Meetup::City.new(@meetup_api,
                                name: c['name'],
                                location: c_location,
                                country: c['country'])
-
-puts city_object.to_yaml
-puts city_object.events
+puts city_object
