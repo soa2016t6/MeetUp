@@ -1,4 +1,4 @@
-# module comment
+# frozen_string_literal: true
 module Meetup
   # Location class, having long and lat
   class Location

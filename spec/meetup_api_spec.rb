@@ -5,13 +5,15 @@ require 'yaml'
 require '../lib/meetup_api.rb'
 require '../lib/location.rb'
 require '../lib/city.rb'
+require '../lib/event.rb'
+require '../lib/group.rb'
 
 CREDENTIALS = YAML.load(File.read('../config/credentials.yml'))
 
 describe 'MeetUp Api tests' do
   before do
     @meetup_api = Meetup::MeetupApi.new(CREDENTIALS)
-    cities = @meetup_api.get_cities('tw')['results']
+    cities = @meetup_api.get_cities('tw')
     c = cities[0]
     @city = c
     @cities = cities
@@ -29,9 +31,19 @@ describe 'MeetUp Api tests' do
   it 'should load the events from a city' do
     c_location = Meetup::Location.new(@city['lat'], @city['lon'])
     city_object = Meetup::City.new(@meetup_api,
-                                   @city['name'],
-                                   c_location, @city['country'])
+                                   name: @city['name'],
+                                   location: c_location,
+                                   country: @city['country'])
     city_object.events.length.must_be :>, 0
+  end
+
+  it 'should load the groups from a city' do
+    c_location = Meetup::Location.new(@city['lat'], @city['lon'])
+    city_object = Meetup::City.new(@meetup_api,
+                                   name: @city['name'],
+                                   location: c_location,
+                                   country: @city['country'])
+    city_object.groups.length.must_be :>, 0
   end
 
   it 'should save the results of get_events to "events City.yml"' do

@@ -22,7 +22,7 @@ module Meetup
                                            key: @access_key })
       response = JSON.parse(cities_response.to_s)
       add_log(response, "cities_#{country_code}")
-      response
+      response['results']
     end
 
     # Gets events based on the location. Place var just for fixtures
@@ -35,6 +35,7 @@ module Meetup
                                            key: @access_key })
       response = JSON.parse(events_response.to_s)
       add_log(response, "events_#{place}")
+      response
     end
 
     # Finds groups based on a location text query
@@ -47,6 +48,7 @@ module Meetup
                                            key: @access_key })
       response = JSON.parse(groups_response.to_s)
       add_log(response, "groups_at_#{location_raw_text}")
+      response
     end
 
     def add_log(response, filename)
