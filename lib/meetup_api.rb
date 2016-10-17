@@ -34,7 +34,7 @@ module Meetup
                                            signed: true,
                                            key: @access_key })
       response = JSON.parse(events_response.to_s)
-      add_log(response, "events_#{place}")
+      add_log(response, "events_at_#{place}")
       response
     end
 
