@@ -5,7 +5,7 @@ module Meetup
   class MeetupApi
     API_URL = 'https://api.meetup.com/'.freeze
     API_VERSION = '2'.freeze
-    LOG_LOCATION = '../spec/fixtures/'.freeze
+    LOG_LOCATION = 'spec/fixtures/'.freeze # m
     VERSIONED_API_URL = URI.join(API_URL, "#{API_VERSION}/")
 
     # Grabs the api ket from config file inside the config directory
