@@ -1,9 +1,13 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'minitest/autorun'
 require 'minitest/rg'
 require 'yaml'
 require 'vcr'
 require 'webmock'
-require 'html'
+require 'http'
+
 require '../lib/meetup_api.rb'
 require '../lib/location.rb'
 require '../lib/city.rb'

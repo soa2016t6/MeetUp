@@ -1,2 +1,4 @@
 config/
 spec/fixtures/
+spec/coverage/
+coverage/
