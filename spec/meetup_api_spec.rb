@@ -2,12 +2,30 @@
 require_relative 'spec_helper'
 
 describe 'MeetUp Api tests' do
+  VCR.configure do |c|
+    c.cassette_library_dir = CASSETTES_FOLDER
+    c.hook_into :webmock
+
+    c.filter_sensitive_data('<API_KEY>') do
+      CREDENTIALS.first['api_key']
+    end
+    c.filter_sensitive_data('<API_KEY>') do
+      URI.escape(CREDENTIALS.first['api_key'])
+    end
+  end
+
   before do
+    VCR.insert_cassette CASSETTE_FILE, record: :new_episodes
+
     @meetup_api = Meetup::MeetupApi.new(CREDENTIALS)
     cities = @meetup_api.get_cities('tw')
     c = cities[0]
     @city = c
     @cities = cities
+  end
+
+  after do
+    VCR.eject_cassette
   end
 
   it 'should get cities data from api"' do
