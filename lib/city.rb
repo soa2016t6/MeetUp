@@ -34,5 +34,10 @@ module Meetup
                                                  location: @location)
       @events = located_events.events
     end
+
+    def self.find(id:)
+      city_data = MeetupApi.cities_info(id)
+      new(data: city_data)
+    end
   end
 end

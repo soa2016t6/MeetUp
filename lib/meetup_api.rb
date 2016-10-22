@@ -26,6 +26,18 @@ module Meetup
       response['results']
     end
 
+    def cities_info(id)
+      id = "id: #{id}"
+      api_url = URI.join(VERSIONED_API_URL, '/cities/')
+      cities2_response = HTTP.get(api_url,
+                                  params: { query: id,
+                                            signed: true,
+                                            key: @access_key })
+      response = JSON.parse(cities2_response.to_s)
+      add_log(response, "id: #{id}")
+      response['results']
+    end
+
     # Gets events based on the location. Place var just for fixtures
     def get_events(place, lat, lon)
       api_url = URI.join(API_URL, '/find/events/')

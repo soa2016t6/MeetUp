@@ -74,4 +74,6 @@ describe 'MeetUp Api tests' do
     # groups_output.wont_be_nil
     # groups_output.count { |line| line =~ /description:/ }.must_be.>=1
   end
+
+  cities_info('94101')
 end
