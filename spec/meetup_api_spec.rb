@@ -41,7 +41,6 @@ describe 'MeetUp Api tests' do
   end
 
   it 'should load the events from a city' do
-    puts @city
     c_location = Meetup::Location.new(@city['lat'], @city['lon'])
     city_object = Meetup::City.new(@meetup_api,
                                    name: @city['city'],

@@ -1,11 +1,12 @@
+# frozen_string_literal: true
 require 'http'
 require 'yaml'
 module Meetup
   # Meetup api
   class MeetupApi
-    API_URL = 'https://api.meetup.com/'.freeze
-    API_VERSION = '2'.freeze
-    LOG_LOCATION = 'spec/fixtures/'.freeze # m
+    API_URL = 'https://api.meetup.com/'
+    API_VERSION = '2'
+    LOG_LOCATION = 'spec/fixtures/'
     VERSIONED_API_URL = URI.join(API_URL, "#{API_VERSION}/")
 
     # Grabs the api ket from config file inside the config directory

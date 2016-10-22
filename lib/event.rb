@@ -23,7 +23,6 @@ module Meetup
 
     def initialize(meetup_api, location_name:, location:)
       @meetup_api = meetup_api
-      puts location_name
       raw_events = @meetup_api.get_events(location_name,
                                           location.lat,
                                           location.lon)
