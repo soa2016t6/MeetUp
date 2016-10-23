@@ -35,9 +35,12 @@ module Meetup
       @events = located_events.events
     end
 
-    def self.find(id:)
-      city_data = MeetupApi.cities_info(id)
-      new(data: city_data)
+    def self.find(meetup_api, id:)
+      city_data = meetup_api.cities_info(id)[0]
+      new(meetup_api, name: city_data['city'],
+                      location: Meetup::Location.new(city_data['lat'],
+                                                     city_data['lon']),
+                      country: city_data['country'])
     end
   end
 end

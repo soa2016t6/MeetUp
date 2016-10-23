@@ -4,11 +4,10 @@ require 'yaml'
 module Meetup
   # Meetup api
   class MeetupApi
-    API_URL = 'https://api.meetup.com/'
+    API_URL = 'https://api.meetup.com'
     API_VERSION = '2'
     LOG_LOCATION = 'spec/fixtures/'
-    VERSIONED_API_URL = URI.join(API_URL, "#{API_VERSION}/")
-
+    VERSIONED_API_URL = URI.join(API_URL, API_VERSION.to_s)
     # Grabs the api ket from config file inside the config directory
     def initialize(credentials)
       @access_key = credentials.first['api_key']
@@ -27,14 +26,14 @@ module Meetup
     end
 
     def cities_info(id)
-      id = "id: #{id}"
-      api_url = URI.join(VERSIONED_API_URL, '/cities/')
+      api_url = URI.join(API_URL, "/#{API_VERSION}/", 'cities')
+      escaped_id = "id+=+#{id}"
       cities2_response = HTTP.get(api_url,
-                                  params: { query: id,
+                                  params: { query: URI.encode(escaped_id),
                                             signed: true,
                                             key: @access_key })
       response = JSON.parse(cities2_response.to_s)
-      add_log(response, "id: #{id}")
+      add_log(response, "city_id_#{id}")
       response['results']
     end
 
@@ -61,6 +60,17 @@ module Meetup
                                            key: @access_key })
       response = JSON.parse(groups_response.to_s)
       add_log(response, "groups_at_#{location_raw_text}")
+      response
+    end
+
+    # Finds groups based on a location text query
+    def find_group_by_url(urlname)
+      api_url = URI.join(API_URL, "/#{urlname}")
+      groups_response = HTTP.get(api_url,
+                                 params: { signed: true,
+                                           key: @access_key })
+      response = JSON.parse(groups_response.to_s)
+      add_log(response, "group_with_url_#{urlname}")
       response
     end
 

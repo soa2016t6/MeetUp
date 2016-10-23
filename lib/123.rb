@@ -17,5 +17,3 @@ city_object = Meetup::City.new(@meetup_api,
                                location: c_location,
                                country: c['country'])
 puts city_object
-
-cities_info(94101)

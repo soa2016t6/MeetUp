@@ -16,6 +16,15 @@ module Meetup
       @city = city
       @location = location
     end
+
+    def self.find(meetup_api, urlname:)
+      group = meetup_api.find_group_by_url(urlname)
+      new(name: group['name'],
+          city: group ['city'],
+          urlname: group['urlname'],
+          location: Meetup::Location.new(group['lat'],
+                                         group['lon']))
+    end
   end
 
   # Class to extract the located groups from meetup

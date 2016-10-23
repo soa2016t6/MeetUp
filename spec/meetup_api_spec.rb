@@ -75,5 +75,13 @@ describe 'MeetUp Api tests' do
     # groups_output.count { |line| line =~ /description:/ }.must_be.>=1
   end
 
-  cities_info('94101')
+  it 'should find a single city by id' do
+    info = Meetup::City.find(@meetup_api, id: '94101')
+    info.name.must_equal('San Francisco')
+  end
+
+  it 'should find a single group by id' do
+    info = Meetup::Group.find(@meetup_api, urlname: 'Hiking-and-Riding-in-Taipei')
+    info.name.must_equal('Hiking and Riding in Taipei')
+  end
 end
