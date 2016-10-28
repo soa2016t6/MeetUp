@@ -7,10 +7,11 @@ describe 'MeetUp Api tests' do
     c.hook_into :webmock
 
     c.filter_sensitive_data('<API_KEY>') do
-      CREDENTIALS.first['api_key']
+      URI.unescape(ENV['MeetUP_Key'])
     end
+
     c.filter_sensitive_data('<API_KEY>') do
-      URI.escape(CREDENTIALS.first['api_key'])
+      URI.escape(ENV['MeetUP_Key'])
     end
   end
 
@@ -83,5 +84,16 @@ describe 'MeetUp Api tests' do
   it 'should find a single group by id' do
     info = Meetup::Group.find(@meetup_api, urlname: 'Hiking-and-Riding-in-Taipei')
     info.name.must_equal('Hiking and Riding in Taipei')
+  end
+
+  describe 'MeetUp Credentials' do
+    it 'should be able to get a new access token with ENV credentials' do
+      Meetup::MeetupApi.config.length.must_be :>, 0
+    end
+
+    it 'should be able to get a new access token with file credentials' do
+      Meetup::MeetupApi.config = { api_key: ENV['MeetUP_Key'] }
+      Meetup::MeetupApi.config.length.must_be :>, 0
+    end
   end
 end

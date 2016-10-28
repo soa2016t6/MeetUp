@@ -13,6 +13,11 @@ module Meetup
       @access_key = credentials.first['api_key']
     end
 
+    def self.config
+      return @config if @config
+      @config = { api_key:     ENV['MeetUP_Key'] }
+    end
+
     # Gets cities based on country code (ex. tw)
     def get_cities(country_code)
       api_url = URI.join(VERSIONED_API_URL, '/cities/')

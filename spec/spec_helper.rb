@@ -22,3 +22,8 @@ require_relative '../lib/MeetUp/group.rb'
 CREDENTIALS = YAML.load(File.read('config/credentials.yml'))
 CASSETTES_FOLDER = 'spec/fixtures/cassettes/'
 CASSETTE_FILE = 'meetup_api_cassette'
+
+if File.file?('config/credentials.yml')
+  credentials = YAML.load(File.read('config/credentials.yml'))
+  ENV['MeetUP_Key'] = credentials[:api_key]
+end
