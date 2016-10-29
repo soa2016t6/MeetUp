@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'simplecov'
-# Fix
+# Fi
 
 SimpleCov.configure do
   @filters = []
@@ -19,6 +19,6 @@ require_relative '../lib/meetup_api/city.rb'
 require_relative '../lib/meetup_api/event.rb'
 require_relative '../lib/meetup_api/group.rb'
 
-CREDENTIALS = YAML.load(File.read('config/credentials.yml'))
+#CREDENTIALS = YAML.load(File.read('config/credentials.yml'))
 CASSETTES_FOLDER = 'spec/fixtures/cassettes/'
 CASSETTE_FILE = 'meetup_api_cassette'

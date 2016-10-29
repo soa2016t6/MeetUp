@@ -1,23 +1,34 @@
 # frozen_string_literal: true
 require_relative 'spec_helper'
 
+# check key in either credentials.yml or environment variable MEETUP_API_KEY
+key_credentials = ""
+
+if File.file?('config/credentials.yml')
+  key_credentials = YAML.load(File.read('config/credentials.yml')).first['api_key']
+elsif ENV['MEETUP_API_KEY'].nil?
+  puts 'MEETUP_API_KEY environment variable not found! Please define it.'
+else
+  key_credentials = ENV['MEETUP_API_KEY']
+end
+
 describe 'MeetUp Api tests' do
   VCR.configure do |c|
     c.cassette_library_dir = CASSETTES_FOLDER
     c.hook_into :webmock
 
     c.filter_sensitive_data('<API_KEY>') do
-      CREDENTIALS.first['api_key']
+      key_credentials
     end
     c.filter_sensitive_data('<API_KEY>') do
-      URI.escape(CREDENTIALS.first['api_key'])
+      URI.escape(key_credentials)
     end
   end
 
   before do
     VCR.insert_cassette CASSETTE_FILE, record: :new_episodes
 
-    @meetup_api = Meetup::MeetupApi.new(CREDENTIALS)
+    @meetup_api = Meetup::MeetupApi.new
     cities = @meetup_api.get_cities('tw')
     c = cities[0]
     @city = c
