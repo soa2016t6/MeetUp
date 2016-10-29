@@ -13,11 +13,11 @@ require 'vcr'
 require 'webmock'
 require 'http'
 
-require_relative '../lib/meetup_api.rb'
-require_relative '../lib/location.rb'
-require_relative '../lib/city.rb'
-require_relative '../lib/event.rb'
-require_relative '../lib/group.rb'
+require_relative '../lib/meetup_api/meetup_api.rb'
+require_relative '../lib/meetup_api/location.rb'
+require_relative '../lib/meetup_api/city.rb'
+require_relative '../lib/meetup_api/event.rb'
+require_relative '../lib/meetup_api/group.rb'
 
 CREDENTIALS = YAML.load(File.read('config/credentials.yml'))
 CASSETTES_FOLDER = 'spec/fixtures/cassettes/'
