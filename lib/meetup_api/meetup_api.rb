@@ -21,7 +21,7 @@ module Meetup
                                            signed: true,
                                            key: @access_key })
       response = JSON.parse(cities_response.to_s)
-      add_log(response, "cities_#{country_code}")
+      # add_log(response, "cities_#{country_code}")
       response['results']
     end
 
@@ -33,12 +33,12 @@ module Meetup
                                             signed: true,
                                             key: @access_key })
       response = JSON.parse(cities2_response.to_s)
-      add_log(response, "city_id_#{id}")
+      # add_log(response, "city_id_#{id}")
       response['results']
     end
 
     # Gets events based on the location. Place var just for fixtures
-    def get_events(place, lat, lon)
+    def get_events( lat, lon)
       api_url = URI.join(API_URL, '/find/events/')
       events_response = HTTP.get(api_url,
                                  params: { lon: lon,
@@ -46,7 +46,7 @@ module Meetup
                                            signed: true,
                                            key: @access_key })
       response = JSON.parse(events_response.to_s)
-      add_log(response, "events_at_#{place}")
+      # add_log(response, "events_at_#{place}")
       response
     end
 
@@ -59,7 +59,7 @@ module Meetup
                                            location: location_raw_text,
                                            key: @access_key })
       response = JSON.parse(groups_response.to_s)
-      add_log(response, "groups_at_#{location_raw_text}")
+      # add_log(response, "groups_at_#{location_raw_text}")
       response
     end
 
@@ -70,7 +70,7 @@ module Meetup
                                  params: { signed: true,
                                            key: @access_key })
       response = JSON.parse(groups_response.to_s)
-      add_log(response, "group_with_url_#{urlname}")
+      # add_log(response, "group_with_url_#{urlname}")
       response
     end
 

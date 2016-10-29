@@ -23,8 +23,7 @@ module Meetup
 
     def initialize(meetup_api, location_name:, location:)
       @meetup_api = meetup_api
-      raw_events = @meetup_api.get_events(location_name,
-                                          location.lat,
+      raw_events = @meetup_api.get_events(location.lat,
                                           location.lon)
       @events = raw_events.map do |g|
         Meetup::Event.new(name: g['name'], status: g['status'],
