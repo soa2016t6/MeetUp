@@ -10,9 +10,7 @@ module Meetup
     VERSIONED_API_URL = URI.join(API_URL, API_VERSION.to_s)
     # Grabs the api ket from config file inside the config directory
     def initialize
-      if File.file?('config/credentials.yml')
-        @access_key = YAML.load(File.read('config/credentials.yml')).first['api_key']
-      elsif ENV['MEETUP_API_KEY'].nil?
+      if ENV['MEETUP_API_KEY'].nil?
         puts 'MEETUP_API_KEY environment variable not found! Please define it.'
       else
         @access_key = ENV['MEETUP_API_KEY']
