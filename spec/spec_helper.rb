@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'simplecov'
-# Fix
+# Fi
 
 SimpleCov.configure do
   @filters = []
@@ -22,3 +22,6 @@ require_relative '../lib/meetup_api/group.rb'
 CREDENTIALS = YAML.load(File.read('config/credentials.yml'))
 CASSETTES_FOLDER = 'spec/fixtures/cassettes/'
 CASSETTE_FILE = 'meetup_api_cassette'
+
+#set MEETUP_API_KEY environment variable
+ENV['MEETUP_API_KEY'] = CREDENTIALS.first['api_key']

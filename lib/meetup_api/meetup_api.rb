@@ -9,8 +9,13 @@ module Meetup
     LOG_LOCATION = 'spec/fixtures/'
     VERSIONED_API_URL = URI.join(API_URL, API_VERSION.to_s)
     # Grabs the api ket from config file inside the config directory
-    def initialize(credentials)
-      @access_key = credentials.first['api_key']
+    def initialize
+      if ENV['MEETUP_API_KEY'].nil?
+        puts 'MEETUP_API_KEY environment variable not found! Please define it.'
+      else
+        @access_key = ENV['MEETUP_API_KEY']
+      end
+      # @access_key = credentials.first['api_key']
     end
 
     # Gets cities based on country code (ex. tw)

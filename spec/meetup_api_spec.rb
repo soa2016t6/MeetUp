@@ -7,17 +7,17 @@ describe 'MeetUp Api tests' do
     c.hook_into :webmock
 
     c.filter_sensitive_data('<API_KEY>') do
-      CREDENTIALS.first['api_key']
+      ENV['MEETUP_API_KEY']
     end
     c.filter_sensitive_data('<API_KEY>') do
-      URI.escape(CREDENTIALS.first['api_key'])
+      URI.escape(ENV['MEETUP_API_KEY'])
     end
   end
 
   before do
     VCR.insert_cassette CASSETTE_FILE, record: :new_episodes
 
-    @meetup_api = Meetup::MeetupApi.new(CREDENTIALS)
+    @meetup_api = Meetup::MeetupApi.new
     cities = @meetup_api.get_cities('tw')
     c = cities[0]
     @city = c
