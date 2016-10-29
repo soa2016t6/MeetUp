@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
 
   s.summary     =  'Gets events and groups content from Meetup'
   s.description =  'Extracts events, groups, and cities from Meetup'
-  s.authors     =  ['Isaac Martinez, Fabio Daio, Roverto Yebra']
+  s.authors     =  ['Isaac Martinez, Fabio Daio, Roberto Yebra']
   s.email       =  ['soumya.ray@gmail.com']
 
   s.files       =  `git ls-files`.split("\n")

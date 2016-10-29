@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'http'
-require 'yaml'
+
 module Meetup
   # Meetup api
   class MeetupApi
