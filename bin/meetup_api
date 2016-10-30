@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# frozen_string_literal: true
+
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w(.. lib))
 require 'meetup_api'
 
@@ -9,7 +9,6 @@ unless group_id
   exit(1)
 end
 
-group = Meetup::Group.find(@meetup_api,
-                           urlname: group_id)
+group = Meetup::Group.find(urlname: group_id)
 
 puts group
