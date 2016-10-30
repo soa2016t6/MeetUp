@@ -1,4 +1,5 @@
-config/
+config/credes.ymlnti
 spec/fixtures/
-spec/coverage/
 coverage/
+Gemfile.lock
+*.gem

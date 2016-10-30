@@ -16,9 +16,7 @@ describe 'MeetUp Api tests' do
 
   before do
     VCR.insert_cassette CASSETTE_FILE, record: :new_episodes
-
-    @meetup_api = Meetup::MeetupApi.new
-    cities = @meetup_api.get_cities('tw')
+    cities = Meetup::MeetupApi.get_cities('tw')
     c = cities[0]
     @city = c
     @cities = cities
@@ -34,8 +32,7 @@ describe 'MeetUp Api tests' do
 
   it 'should load the events from a city' do
     c_location = Meetup::Location.new(@city['lat'], @city['lon'])
-    city_object = Meetup::City.new(@meetup_api,
-                                   name: @city['city'],
+    city_object = Meetup::City.new(name: @city['city'],
                                    location: c_location,
                                    country: @city['country'])
     city_object.events.length.must_be :>, 0
@@ -43,21 +40,19 @@ describe 'MeetUp Api tests' do
 
   it 'should load the groups from a city' do
     c_location = Meetup::Location.new(@city['lat'], @city['lon'])
-    city_object = Meetup::City.new(@meetup_api,
-                                   name: @city['city'],
+    city_object = Meetup::City.new(name: @city['city'],
                                    location: c_location,
                                    country: @city['country'])
     city_object.groups.length.must_be :>, 0
   end
 
   it 'should find a single city by id' do
-    info = Meetup::City.find(@meetup_api, id: '94101')
+    info = Meetup::City.find(id: '94101')
     info.name.must_equal('San Francisco')
   end
 
   it 'should find a single group by id' do
-    info = Meetup::Group.find(@meetup_api,
-                              urlname: 'Hiking-and-Riding-in-Taipei')
+    info = Meetup::Group.find(urlname: 'Hiking-and-Riding-in-Taipei')
     info.name.must_equal('Hiking and Riding in Taipei')
   end
 end

@@ -12,8 +12,7 @@ module Meetup
     attr_reader :events
     attr_reader :groups
 
-    def initialize(meetup_api, name:, location:, country:)
-      @meetup_api = meetup_api
+    def initialize(name:, location:, country:)
       @name = name
       @location = location
       @country = country
@@ -21,26 +20,23 @@ module Meetup
 
     def groups
       return @groups if @groups
-      located_groups = Meetup::LocatedGroups.new(@meetup_api,
-                                                 country: @country,
+      located_groups = Meetup::LocatedGroups.new(country: @country,
                                                  location_raw_text: @name)
       @groups = located_groups.groups
     end
 
     def events
       return @events if @events
-      located_events = Meetup::LocatedEvents.new(@meetup_api,
-                                                 location_name: @name,
-                                                 location: @location)
+      located_events = Meetup::LocatedEvents.new(location: @location)
       @events = located_events.events
     end
 
-    def self.find(meetup_api, id:)
-      city_data = meetup_api.cities_info(id)[0]
-      new(meetup_api, name: city_data['city'],
-                      location: Meetup::Location.new(city_data['lat'],
-                                                     city_data['lon']),
-                      country: city_data['country'])
+    def self.find(id:)
+      city_data = MeetupApi.cities_info(id)[0]
+      new(name: city_data['city'],
+          location: Meetup::Location.new(city_data['lat'],
+                                         city_data['lon']),
+          country: city_data['country'])
     end
   end
 end

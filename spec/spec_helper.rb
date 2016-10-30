@@ -23,5 +23,5 @@ CREDENTIALS = YAML.load(File.read('config/credentials.yml'))
 CASSETTES_FOLDER = 'spec/fixtures/cassettes/'
 CASSETTE_FILE = 'meetup_api_cassette'
 
-#set MEETUP_API_KEY environment variable
+# set MEETUP_API_KEY environment variable
 ENV['MEETUP_API_KEY'] = CREDENTIALS.first['api_key']

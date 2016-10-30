@@ -17,8 +17,8 @@ module Meetup
       @location = location
     end
 
-    def self.find(meetup_api, urlname:)
-      group = meetup_api.find_group_by_url(urlname)
+    def self.find(urlname:)
+      group = MeetupApi.find_group_by_url(urlname)
       new(name: group['name'],
           city: group ['city'],
           urlname: group['urlname'],
@@ -31,9 +31,8 @@ module Meetup
   class LocatedGroups
     attr_reader :groups
 
-    def initialize(meetup_api, country:, location_raw_text:)
-      @meetup_api = meetup_api
-      raw_groups = @meetup_api.get_groups(country, location_raw_text)
+    def initialize(country:, location_raw_text:)
+      raw_groups = MeetupApi.get_groups(country, location_raw_text)
       @groups = raw_groups.map do |g|
         Meetup::Group.new(
           name: g['name'], urlname: g['urlname'], city: g['city'],
