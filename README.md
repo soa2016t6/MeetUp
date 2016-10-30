@@ -17,7 +17,7 @@ Please setup your Meetup developer account, and get an API key from https://secu
 
 Require meetup_api gem in your code: `require 'meetup_api'`
 
-Supply your Me credetupentials to our library in one of two ways:
+Supply your Meetup credentials to our library in one of two ways:
 - Setup environment variables: `ENV['MEETUP_API_KEY']`
 - or, provide them directly to meetup_api:
 
