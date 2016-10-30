@@ -24,6 +24,9 @@ GEM
     http-form_data (1.0.1)
     http_parser.rb (0.6.0)
     json (2.0.2)
+    minitest (5.9.1)
+    minitest-rg (5.2.0)
+      minitest (~> 5.0)
     path_expander (1.0.0)
     rake (11.3.0)
     ruby_parser (3.8.3)
@@ -50,6 +53,8 @@ PLATFORMS
 DEPENDENCIES
   flay
   http
+  minitest
+  minitest-rg
   rake
   simplecov
   vcr

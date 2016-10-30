@@ -13,11 +13,7 @@ require 'vcr'
 require 'webmock'
 require 'http'
 
-require_relative '../lib/meetup_api/meetup_api.rb'
-require_relative '../lib/meetup_api/location.rb'
-require_relative '../lib/meetup_api/city.rb'
-require_relative '../lib/meetup_api/event.rb'
-require_relative '../lib/meetup_api/group.rb'
+require_relative '../lib/meetupevents'
 
 if File.file?('config/credentials.yml')
   credentials = YAML.load(File.read('config/credentials.yml'))

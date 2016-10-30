@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 $LOAD_PATH.push File.expand_path('../lib', __FILE__)
-require 'meetup_api/version'
+require 'meetupevents/version'
 
 Gem::Specification.new do |s|
-  s.name        =  'meetup_api'
+  s.name        =  'meetupevents'
   s.version     =  Meetup::VERSION
 
   s.summary     =  'Gets events and groups content from Meetup'
   s.description =  'Extracts events, groups, and cities from Meetup'
   s.authors     =  ['Isaac Martinez, Fabio Daio, Roberto Yebra']
-  s.email       =  ['soumya.ray@gmail.com']
+  s.email       =  ['imtz90b@gmail.com']
 
   s.files       =  `git ls-files`.split("\n")
   s.test_files  =  `git ls-files -- spec/*`.split("\n")
-  s.executables =  ['meetup_api']
+  s.executables =  ['meetupevents']
 
   s.add_runtime_dependency 'http', '~> 2.0'
 

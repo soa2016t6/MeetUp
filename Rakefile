@@ -3,7 +3,7 @@
 namespace :tests do
   desc 'run tests'
   task :spec do
-    sh 'ruby spec/meetup_api_spec.rb'
+    sh 'ruby spec/meetupevents_spec.rb'
   end
 
   desc 'delete cassette fixtures'

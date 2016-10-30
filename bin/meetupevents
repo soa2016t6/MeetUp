@@ -5,7 +5,7 @@ require 'meetup_api'
 
 group_id = ARGV[0] || ENV['MEETUP_GROUP_ID']
 unless group_id
-  puts 'USAGE: meetupevents [group_id]'
+  puts 'USAGE: meetup_api [group_id]'
   exit(1)
 end
 
