@@ -1,4 +1,5 @@
 # MeetUp
+[![Build Status](https://travis-ci.org/soa2016t6/MeetUp.svg?branch=master)](https://travis-ci.org/soa2016t6/MeetUp)
 meetup_api is a gem that specializes in getting data from Meetup Groups, cities and events.
 
 ## Installation
