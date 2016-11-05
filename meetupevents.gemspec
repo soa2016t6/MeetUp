@@ -5,15 +5,15 @@ require 'meetupevents/version'
 Gem::Specification.new do |s|
   s.name        =  'meetupevents'
   s.version     =  Meetup::VERSION
-
+  s.date        = '2016-11-06'
   s.summary     =  'Gets events and groups content from Meetup'
   s.description =  'Extracts events, groups, and cities from Meetup'
-  s.authors     =  ['Isaac Martinez, Fabio Daio, Roberto Yebra']
-  s.email       =  ['imtz90b@gmail.com']
+  s.authors     =  'Isaac Martinez, Fabio Daio, Roberto Yebra'
+  s.email       =  'imtz90b@gmail.com'
 
   s.files       =  `git ls-files`.split("\n")
   s.test_files  =  `git ls-files -- spec/*`.split("\n")
-  s.executables =  ['meetupevents']
+  s.executables << 'meetupevents'
 
   s.add_runtime_dependency 'http', '~> 2.0'
 

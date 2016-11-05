@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require_relative 'meetup_api'
+require_relative 'meetupevents'
 require_relative 'location'
 require_relative 'group'
 
