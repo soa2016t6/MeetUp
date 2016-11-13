@@ -9,6 +9,7 @@ module Meetup
     attr_reader :urlname
     attr_reader :city
     attr_reader :location
+    attr_reader :country
 
     def initialize(name:, urlname:, city:, location:, country:)
       @name = name

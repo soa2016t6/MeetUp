@@ -5,7 +5,7 @@ require 'meetupevents/version'
 Gem::Specification.new do |s|
   s.name        =  'meetupevents'
   s.version     =  Meetup::VERSION
-  s.date        = '2016-11-06'
+  s.date        = '2016-11-12'
   s.summary     =  'Gets events and groups content from Meetup'
   s.description =  'Extracts events, groups, and cities from Meetup'
   s.authors     =  'Isaac Martinez, Fabio Daio, Roberto Yebra'
