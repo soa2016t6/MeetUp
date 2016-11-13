@@ -10,11 +10,12 @@ module Meetup
     attr_reader :city
     attr_reader :location
 
-    def initialize(name:, urlname:, city:, location:)
+    def initialize(name:, urlname:, city:, location:, country:)
       @name = name
       @urlname = urlname
       @city = city
       @location = location
+      @country = country
     end
 
     def self.find(urlname:)
@@ -22,6 +23,7 @@ module Meetup
       new(name: group['name'],
           city: group ['city'],
           urlname: group['urlname'],
+          country: group['country'],
           location: Meetup::Location.new(group['lat'],
                                          group['lon']))
     end
@@ -36,7 +38,8 @@ module Meetup
       @groups = raw_groups.map do |g|
         Meetup::Group.new(
           name: g['name'], urlname: g['urlname'], city: g['city'],
-          location: Meetup::Location.new(g['lat'], g['lon'])
+          location: Meetup::Location.new(g['lat'], g['lon']),
+          country: g['country']
         )
       end
     end
