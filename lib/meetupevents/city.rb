@@ -11,11 +11,13 @@ module Meetup
     attr_reader :country
     attr_reader :events
     attr_reader :groups
+    attr_reader :topic
 
-    def initialize(name:, location:, country:)
+    def initialize(name:, location:, country:, topic: 'none')
       @name = name
       @location = location
       @country = country
+      @topic = topic
     end
 
     def groups
@@ -27,7 +29,9 @@ module Meetup
 
     def events
       return @events if @events
-      located_events = Meetup::LocatedEvents.new(location: @location)
+      located_events = Meetup::LocatedEvents.new(city: @name,
+                                                 country: @country,
+                                                 topic: @topic)
       @events = located_events.events
     end
 

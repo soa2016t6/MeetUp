@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'http'
+require 'cgi'
 module Meetup
   # Meetup api
   class MeetupApi
@@ -51,8 +52,20 @@ module Meetup
       response['results']
     end
 
+    # Get all cities of a country
+    def self.get_cities_by_country(country)
+      api_url = URI.join(API_URL, "/#{API_VERSION}/", 'cities')
+      cities_response = HTTP.get(api_url,
+                                 params: { country: country,
+                                           signed: true,
+                                           key: access_key })
+      response = JSON.parse(cities_response.to_s)
+      # add_log(response, "events_at_#{place}")
+      response
+    end
+
     # Gets events based on the location. Place var just for fixtures
-    def self.get_events(lat, lon)
+    def self.get_events_location(lat, lon)
       api_url = URI.join(API_URL, '/find/events/')
       events_response = HTTP.get(api_url,
                                  params: { lon: lon,
@@ -62,6 +75,21 @@ module Meetup
       response = JSON.parse(events_response.to_s)
       # add_log(response, "events_at_#{place}")
       response
+    end
+
+    def self.get_events_city(country, city, topic)
+      params = { country: country,
+                 city: city,
+                 topic: topic,
+                 signed: true,
+                 key: access_key }
+      params.tap{ |h| h.delete(:topic) } unless topic != 'none'
+      api_url = URI.join(API_URL, "/#{API_VERSION}/", 'open_events')
+      events_response = HTTP.get(api_url,
+                                 params: params)
+      response = JSON.parse(events_response.to_s)
+      # add_log(response, "events_at_#{place}")
+      response['results']
     end
 
     # Finds groups based on a location text query
@@ -79,6 +107,7 @@ module Meetup
 
     # Finds groups based on a location text query
     def self.find_group_by_url(urlname)
+      urlname = CGI.escape(urlname)
       api_url = URI.join(API_URL, "/#{urlname}")
       groups_response = HTTP.get(api_url,
                                  params: { signed: true,
