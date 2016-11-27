@@ -30,6 +30,12 @@ describe 'MeetUp Api tests' do
     @cities.length.must_be :>, 0
   end
 
+  it 'should load the located events from a city' do
+    located_events = Meetup::LocatedEvents.new(city: 'Taipei',
+                                               country: 'TW',
+                                               topic: 'none')
+    located_events.events.length.must_be :>, 0
+  end
   it 'should load the events from a city' do
     c_location = Meetup::Location.new(@city['lat'], @city['lon'])
     city_object = Meetup::City.new(name: @city['city'],

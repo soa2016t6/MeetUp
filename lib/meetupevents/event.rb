@@ -41,7 +41,7 @@ module Meetup
     #   g['category'] ? g['category']['short_name'] : 'None'
     # end
 
-    def initialize(country:, city:, topic:)
+    def initialize(country:, city:, topic: 'none')
       raw_events = MeetupApi.get_events_city(country, city, topic)
       @events = raw_events.map do |g|
         Meetup::Event.new(name: g['name'], status: g['status'],
