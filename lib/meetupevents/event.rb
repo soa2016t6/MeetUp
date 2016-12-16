@@ -6,10 +6,10 @@ module Meetup
   # Class to set up a Meetup Event
   class Event
     attr_reader :name, :status, :city, :venue,
-                :time, :location, :url, :topic
+                :time, :location, :url, :topic, :description
 
     def initialize(name:, status:, city:, venue:, time:,
-                   location:, url:, topic:)
+                   location:, url:, topic:, description:)
       @name = name
       @status = status
       @city = city
@@ -18,6 +18,7 @@ module Meetup
       @location = location
       @url = url
       @topic = topic
+      @description = description
     end
   end
 
@@ -46,6 +47,7 @@ module Meetup
       @events = raw_events.map do |g|
         Meetup::Event.new(name: g['name'], status: g['status'],
                           city: city,
+                          description: g['description'],
                           venue: g['venue'] ? g['venue']['name'] : '', # may nil
                           time: g['time'], location: get_event_location(g),
                           url: g['event_url'], topic: topic)
