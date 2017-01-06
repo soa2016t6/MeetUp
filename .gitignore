@@ -1,5 +1,4 @@
 config/credentials.yml
 spec/fixtures/
 coverage/
-Gemfile.lock
 *.gem
