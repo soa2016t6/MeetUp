@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require_relative 'meetupevents'
 require_relative 'location'
+require 'concurrent'
 
 module Meetup
   # Class to set up a Meetup Event
@@ -45,12 +46,14 @@ module Meetup
     def initialize(country:, city:, topic: 'none')
       raw_events = MeetupApi.get_events_city(country, city, topic)
       @events = raw_events.map do |g|
-        Meetup::Event.new(name: g['name'], status: g['status'],
-                          city: city,
-                          description: g['description'],
-                          venue: g['venue'] ? g['venue']['name'] : '', # may nil
-                          time: g['time'], location: get_event_location(g),
-                          url: g['event_url'], topic: topic)
+        Concurrent::Promise.execute {
+          Meetup::Event.new(name: g['name'], status: g['status'],
+                            city: city,
+                            description: g['description'],
+                            venue: g['venue'] ? g['venue']['name'] : '', # may nil
+                            time: g['time'], location: get_event_location(g),
+                            url: g['event_url'], topic: topic)
+        }
       end
     end
   end
